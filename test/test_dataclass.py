@@ -263,7 +263,9 @@ class TestDataclass:
         dumps() dataclass
         """
         obj = Dataclass1("a", 1, None)
-        assert orjson.dumps(obj, option=orjson.OPT_SKIP_NONE) == b'{"name":"a","number":1}'
+        assert (
+            orjson.dumps(obj, option=orjson.OPT_SKIP_NONE) == b'{"name":"a","number":1}'
+        )
 
 
 class TestDataclassPassthrough:
