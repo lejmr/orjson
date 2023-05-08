@@ -572,6 +572,27 @@ b'"1970-01-01T00:00:00+00:00"'
 b'"1970-01-01T00:00:00Z"'
 ```
 
+##### OPT_SKIP_NONE
+
+Skip fields with `None` values in `dict` and dataclass instances.
+
+```python
+>>> import orjson, dataclasses, typing
+>>> example_dict = {"field1": 10, "field2": None}
+>>> orjson.dumps(example_dict, option=orjson.OPT_SKIP_NONE)
+b'{"field1":10}'
+
+>>>
+@dataclasses.dataclass
+class Dataclass:
+    field1: int
+    field2: typing.Optional[int]
+
+>>> examples_dataclass = Dataclass(10, None)
+>>> orjson.dumps(examples_dataclass, option=orjson.OPT_SKIP_NONE)
+b'{"field1":10}'
+```
+
 ### Deserialize
 
 ```python
